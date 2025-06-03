@@ -1,7 +1,7 @@
 package structures
 
 import (
-	"hstin/geocoder/geo"
+	"hstin/gocoder/geo"
 	"runtime"
 	"sync"
 

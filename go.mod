@@ -1,4 +1,4 @@
-module hstin/geocoder
+module hstin/gocoder
 
 go 1.23.3
 

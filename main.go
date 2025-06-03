@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"hstin/geocoder/config"
-	"hstin/geocoder/generate"
-	"hstin/geocoder/geocoder"
+	"hstin/gocoder/config"
+	"hstin/gocoder/generate"
+	"hstin/gocoder/geocoder"
 	"os"
 	"strconv"
 	"time"

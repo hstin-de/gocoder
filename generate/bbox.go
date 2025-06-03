@@ -3,7 +3,7 @@ package generate
 import (
 	"context"
 	"encoding/gob"
-	"hstin/geocoder/config"
+	"hstin/gocoder/config"
 	"io"
 	"log"
 	"os"

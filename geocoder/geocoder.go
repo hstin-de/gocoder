@@ -2,9 +2,9 @@ package geocoder
 
 import (
 	"encoding/binary"
-	"hstin/geocoder/config"
-	"hstin/geocoder/structures"
-	"hstin/geocoder/utils"
+	"hstin/gocoder/config"
+	"hstin/gocoder/structures"
+	"hstin/gocoder/utils"
 	"io"
 	"log"
 	"os"

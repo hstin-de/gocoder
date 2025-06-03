@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"hstin/geocoder/mapping"
+	"hstin/gocoder/mapping"
 )
 
 func CreateRank(tags map[string]string, pop int64) int {

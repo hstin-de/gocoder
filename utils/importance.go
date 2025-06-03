@@ -3,7 +3,7 @@ package utils
 import (
 	"compress/gzip"
 	"encoding/csv"
-	"hstin/geocoder/config"
+	"hstin/gocoder/config"
 	"io"
 	"log"
 	"os"

@@ -3,9 +3,9 @@ package geocoder
 import (
 	"encoding/binary"
 	"fmt"
-	"hstin/geocoder/mapping"
-	"hstin/geocoder/structures"
-	"hstin/geocoder/utils"
+	"hstin/gocoder/mapping"
+	"hstin/gocoder/structures"
+	"hstin/gocoder/utils"
 	"os"
 	"syscall"
 	"unsafe"

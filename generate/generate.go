@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"context"
 	"encoding/binary"
-	"hstin/geocoder/mapping"
-	"hstin/geocoder/structures"
+	"hstin/gocoder/mapping"
+	"hstin/gocoder/structures"
 	"log"
 	"os"
 	"runtime"
@@ -13,8 +13,8 @@ import (
 	"sync"
 	"time"
 
-	"hstin/geocoder/config"
-	"hstin/geocoder/utils"
+	"hstin/gocoder/config"
+	"hstin/gocoder/utils"
 
 	"github.com/paulmach/osm"
 	"github.com/paulmach/osm/osmpbf"

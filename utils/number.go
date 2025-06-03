@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"hstin/geocoder/mapping"
+	"hstin/gocoder/mapping"
 	"strconv"
 	"strings"
 )
