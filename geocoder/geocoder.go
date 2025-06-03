@@ -196,7 +196,7 @@ func (g *Geocoder) Search(
 
 	returnMap := make(map[int64]Node)
 
-	if useCache {
+	if useCache && !config.DisableCache {
 		g.cacheLock.RLock()
 		cached, ok := g.cache[normalizedQuery]
 		g.cacheLock.RUnlock()
@@ -251,8 +251,10 @@ func (g *Geocoder) Search(
 	returnDocs := sortNodes(utils.MapToSlice(returnMap))
 	foundElements := len(returnDocs)
 
-	// Cache with normalized query
-	g.Cache(normalizedQuery, returnDocs)
+	// Cache with normalized query if cache isnt disabled
+	if !config.DisableCache {
+		g.Cache(normalizedQuery, returnDocs)
+	}
 
 	// If maxResults > 0, limit the returned slice
 	if maxResults > 0 && len(returnDocs) > maxResults {

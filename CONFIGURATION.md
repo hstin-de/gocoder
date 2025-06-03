@@ -20,6 +20,7 @@ export OUTPUT=/path/to/output/germany.gpkg
 export DATABASE=/path/to/database/germany.gpkg
 export ENABLE_FORWARD=true
 export ENABLE_REVERSE=true
+export DISABLE_CACHE=false
 export LANGUAGES=en,de,fr,es
 export WIKIMEDIA_MAX_IMPORTANCE=500.0
 ```
@@ -38,7 +39,8 @@ Create a `config.json` file in your project root:
   "output": "geocoder.gpkg",
   "database": "geocoder.gpkg",
   "enable_forward": true,
-  "enable_reverse": true
+  "enable_reverse": true,
+  "disable_cache": false
 }
 ```
 
@@ -55,6 +57,7 @@ OUTPUT=/app/database/germany.gpkg
 DATABASE=/app/database/germany.gpkg
 ENABLE_FORWARD=true
 ENABLE_REVERSE=true
+DISABLE_CACHE=false
 LANGUAGES=en,de,fr
 WIKIMEDIA_MAX_IMPORTANCE=300.0
 ```
@@ -108,6 +111,13 @@ WIKIMEDIA_MAX_IMPORTANCE=300.0
 - **Default**: `true`
 - **Description**: Enable reverse geocoding API endpoint
 - **Values**: `true`, `false`
+
+#### `DISABLE_CACHE` / `disable_cache`
+- **Type**: Boolean
+- **Default**: `false`
+- **Description**: Disable caching of geocoding results
+- **Values**: `true`, `false`
+- **Note**: Disabling cache can significantly increase response times for repeated queries but lowers memory usage.
 
 ### Language and Data Processing
 

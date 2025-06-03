@@ -25,6 +25,7 @@ var (
 	Database      string = "geocoder.gpkg"
 	EnableForward bool   = true
 	EnableReverse bool   = true
+	DisableCache  bool   = false
 )
 
 type jsonConfig struct {
@@ -37,6 +38,7 @@ type jsonConfig struct {
 	Database               string   `json:"database,omitempty"`
 	EnableForward          *bool    `json:"enable_forward,omitempty"`
 	EnableReverse          *bool    `json:"enable_reverse,omitempty"`
+	DisableCache           *bool    `json:"disable_cache,omitempty"`
 }
 
 func init() {
@@ -76,6 +78,9 @@ func Load() {
 			if cfg.EnableReverse != nil {
 				EnableReverse = *cfg.EnableReverse
 			}
+			if cfg.DisableCache != nil {
+				DisableCache = *cfg.DisableCache
+			}
 		}
 	}
 
@@ -110,6 +115,11 @@ func Load() {
 	if val := os.Getenv("ENABLE_REVERSE"); val != "" {
 		if b, err := strconv.ParseBool(val); err == nil {
 			EnableReverse = b
+		}
+	}
+	if val := os.Getenv("DISABLE_CACHE"); val != "" {
+		if b, err := strconv.ParseBool(val); err == nil {
+			DisableCache = b
 		}
 	}
 
