@@ -150,7 +150,7 @@ When using Docker, mount your configuration and data directories:
 ```yaml
 version: '3.8'
 services:
-  geocoder:
+  gocoder:
     image: ghcr.io/hstin-de/gocoder:latest
     ports:
       - "3000:3000"
@@ -158,7 +158,7 @@ services:
       - ./data:/data
       - ./database:/app/database
       - ./config.json:/app/config.json  # Mount JSON config
-    command: ["./geocoder", "server"]
+    command: ["./gocoder", "server"]
 ```
 
 ## Storage Requirements

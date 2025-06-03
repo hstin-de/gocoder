@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  geocoder:
+  gocoder:
     build: .
     ports:
       - "3000:3000"
@@ -11,11 +11,11 @@ services:
       - DATABASE=/app/database/geocoder.gpkg
       - ENABLE_FORWARD=true
       - ENABLE_REVERSE=true
-    command: ["./geocoder", "server"]
+    command: ["./gocoder", "server"]
     restart: unless-stopped
 
   # Optional: Add a generation service that runs once
-  geocoder-generate:
+  gocoder-generate:
     image: ghcr.io/hstin-de/gocoder:latest
     volumes:
       - ./data:/data
@@ -25,6 +25,6 @@ services:
       - WHOS_ON_FIRST=/data/whosonfirst-data-admin-latest.db
       - WIKIMEDIA_IMPORTANCE=/data/wikimedia-importance.csv.gz
       - OUTPUT=/app/database/germany.gpkg
-    command: ["./geocoder", "generate"]
+    command: ["./gocoder", "generate"]
     profiles:
       - generate

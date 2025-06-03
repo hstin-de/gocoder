@@ -30,10 +30,10 @@ Gocoder utilizes several custom made data structures to ensure efficient geocodi
 ### Building from Source
 
 ```bash
-git clone <repository-url>
-cd geocoder
+git clone https://github.com/hstin-de/gocoder
+cd gocoder
 go mod download
-go build -o geocoder .
+CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags '-w -s' -o gocoder .
 ```
 
 ### Docker Setup
@@ -76,7 +76,7 @@ docker run --rm \
   -e WHOS_ON_FIRST=/data/whosonfirst-data-admin-latest.db \
   -e WIKIMEDIA_IMPORTANCE=/data/wikimedia-importance.csv.gz \
   -e OUTPUT=/app/database/germany.gpkg \
-  ghcr.io/hstin-de/gocoder:latest ./geocoder generate
+  ghcr.io/hstin-de/gocoder:latest ./gocoder generate
 ```
 
 For configuration parameters, refer to the [Configuration](CONFIGURATION.md) file.
@@ -97,7 +97,7 @@ Generation includes:
 version: '3.8'
 
 services:
-  geocoder:
+  gocoder:
     image: ghcr.io/hstin-de/gocoder:latest
     ports:
       - "3000:3000"
@@ -107,7 +107,7 @@ services:
       - DATABASE=/app/database/germany.gpkg
       - ENABLE_FORWARD=true
       - ENABLE_REVERSE=true
-    command: ["./geocoder", "server"]
+    command: ["./gocoder", "server"]
     restart: unless-stopped
 ```
 
@@ -120,7 +120,7 @@ docker run -d \
   -e DATABASE=/app/database/germany.gpkg \
   -e ENABLE_FORWARD=true \
   -e ENABLE_REVERSE=true \
-  ghcr.io/hstin-de/gocoder:latest ./geocoder server
+  ghcr.io/hstin-de/gocoder:latest
 ```
 
 ## API Reference
