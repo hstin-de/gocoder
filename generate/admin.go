@@ -11,11 +11,11 @@ import (
 	"os"
 	"os/exec"
 
-	_ "github.com/mattn/go-sqlite3"
 	"github.com/paulmach/orb"
 	geojson "github.com/paulmach/orb/geojson"
 	"github.com/paulmach/orb/planar"
 	"github.com/tidwall/rtree"
+	_ "modernc.org/sqlite"
 )
 
 type DataAdminArea struct {

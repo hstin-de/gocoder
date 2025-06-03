@@ -1,33 +1,47 @@
-FROM golang:1.23-bullseye AS builder
+# Build stage
+FROM --platform=$BUILDPLATFORM golang:1.23-bookworm AS builder
 
 # Install build dependencies
-RUN apt-get update && \
-    apt-get install -y pkg-config zlib1g-dev && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+    git \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
+
+# Copy go mod files first for better layer caching
 COPY go.mod go.sum ./
 RUN go mod download
 
+# Copy source code
 COPY . .
-RUN go build -o geocoder .
 
+# Build arguments for cross-compilation
+ARG TARGETOS
+ARG TARGETARCH
+
+# Build the application with cross-compilation
+RUN CGO_ENABLED=0 \
+    GOOS=$TARGETOS \
+    GOARCH=$TARGETARCH \
+    go build -a -installsuffix cgo -ldflags '-w -s' -o gocoder .
+
+# Final stage - Ubuntu with osmium tools
 FROM ubuntu:22.04
 
-# Install runtime dependencies
-RUN apt-get update && \
-    apt-get install -y osmium-tool sqlite3 ca-certificates && \
-    rm -rf /var/lib/apt/lists/*
+# Install runtime dependencies including osmium tools
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    osmium-tool \
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
+WORKDIR /root/
 
-# Copy the binary
-COPY --from=builder /app/geocoder .
+# Copy the binary from builder stage
+COPY --from=builder /app/gocoder .
 
-# Create directories for data
-RUN mkdir -p /data/maps /data/database
+# Expose port (adjust as needed)
+EXPOSE 8080
 
-# Expose the server port
-EXPOSE 3000
-
-CMD ["./geocoder", "server"]
+# Run the binary
+CMD ["./gocoder", "server"]
