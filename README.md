@@ -94,18 +94,21 @@ Generation includes:
 **Docker Compose:**
 
 ```yaml
-geocoder:
-  image: ghcr.io/hstin-de/gocoder:latest
-  ports:
-    - "3000:3000"
-  volumes:
-    - ./database:/app/database
-  environment:
-    - DATABASE=/app/database/germany.gpkg
-    - ENABLE_FORWARD=true
-    - ENABLE_REVERSE=true
-  command: ["./geocoder", "server"]
-  restart: unless-stopped
+version: '3.8'
+
+services:
+  geocoder:
+    image: ghcr.io/hstin-de/gocoder:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./database:/app/database
+    environment:
+      - DATABASE=/app/database/germany.gpkg
+      - ENABLE_FORWARD=true
+      - ENABLE_REVERSE=true
+    command: ["./geocoder", "server"]
+    restart: unless-stopped
 ```
 
 **Docker Run:**
